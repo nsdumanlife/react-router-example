@@ -6,6 +6,7 @@ import App from "./App";
 import Authors from "./components/Authors";
 import Books from "./components/Books";
 import Author from "./components/Author";
+import Book from "./components/Book";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -14,7 +15,9 @@ ReactDOM.render(
       <Route path="/authors" element={<Authors />}>
         <Route path=":authorId" element={<Author />} />
       </Route>
-      <Route path="/books" element={<Books />} />
+      <Route path="/books" element={<Books />}>
+        <Route path=":bookId" element={<Book />} />
+      </Route>
       <Route
         path="*"
         element={

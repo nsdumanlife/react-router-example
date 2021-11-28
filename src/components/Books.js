@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 function Books() {
   const [books, setBooks] = useState([]);
 
@@ -10,15 +10,19 @@ function Books() {
     ).then((res) => setBooks(res.data));
   }, []);
   return (
-    <div style={{ padding: "1rem 0" }}>
-      <h2>books</h2>
-      <ul>
+    <div style={{ padding: "1rem 0", display: "flex" }}>
+      <nav style={{ borderRight: "solid 1px", padding: "1rem" }}>
         {books.map((book) => (
-          <li key={book.id}>
-            <Link to={`/books/${book.id}`}>{book.title}</Link>
-          </li>
+          <Link
+            style={{ display: "block", margin: "1rem 0" }}
+            to={`/books/${book.id}`}
+            key={book.id}
+          >
+            {book.title}
+          </Link>
         ))}
-      </ul>
+      </nav>
+      <Outlet />
     </div>
   );
 }

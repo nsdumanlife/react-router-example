@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 function Books() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,13 +14,19 @@ function Books() {
       {loading && <div>Loading...</div>}
       <nav style={{ borderRight: "solid 1px", padding: "1rem" }}>
         {books.map((book) => (
-          <Link
-            style={{ display: "block", margin: "1rem 0" }}
+          <NavLink
+            style={({ isActive }) => {
+              return {
+                display: "block",
+                margin: "1rem 0",
+                color: isActive ? "red" : "",
+              };
+            }}
             to={`/books/${book.id}`}
             key={book.id}
           >
             {book.title}
-          </Link>
+          </NavLink>
         ))}
       </nav>
       <Outlet />
